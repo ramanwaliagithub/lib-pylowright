@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pylowright"
+version = "0.4"
+description = "Pylowright browser automation helpers"
+readme = "README.md"
+authors = [{ name = "Pylonium Contributors" }]
+requires-python = ">=3.9"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pylowright*"]
