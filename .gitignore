@@ -1,2 +1,7 @@
 # Local planning notes
 lib-pylowright/STEP_BY_STEP_PLAN.md
+
+# Python cache artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
