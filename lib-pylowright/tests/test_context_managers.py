@@ -4,7 +4,7 @@ from pylowright.browser.browser import Browser
 from pylowright.browser.session import BrowserSession, _Mode
 
 
-class FakePage:
+class PageStub:
     def __init__(self) -> None:
         self.closed = False
 
@@ -12,7 +12,7 @@ class FakePage:
         self.closed = True
 
 
-class FakeContext:
+class ContextStub:
     def __init__(self) -> None:
         self.closed = False
 
@@ -20,11 +20,11 @@ class FakeContext:
         self.closed = True
 
 
-class FakeSession(BrowserSession):
+class SessionStub(BrowserSession):
     def __init__(self) -> None:
         self._mode = _Mode.EPHEMERAL
-        self._page = FakePage()
-        self._context = FakeContext()
+        self._page = PageStub()
+        self._context = ContextStub()
         self._playwright = None
         self._tracing_active = False
         self.close_called = False
@@ -35,14 +35,14 @@ class FakeSession(BrowserSession):
 
 
 def test_browser_context_manager_closes_on_exit():
-    with Browser(FakeSession()) as browser:
+    with Browser(SessionStub()) as browser:
         assert browser.session is not None
 
     assert browser.session.close_called
 
 
 def test_session_context_manager_closes_resources():
-    session = FakeSession()
+    session = SessionStub()
     with session as sess:
         assert sess is session
 

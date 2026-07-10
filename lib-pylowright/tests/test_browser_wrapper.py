@@ -4,7 +4,7 @@ from pylowright.browser.browser import Browser
 from pylowright.browser.session import BrowserSession, _Mode
 
 
-class FakePage:
+class PageStub:
     def __init__(self) -> None:
         self.goto_calls = []
         self.wait_calls = []
@@ -27,10 +27,10 @@ class FakePage:
         return self._url
 
 
-class FakeSession(BrowserSession):
+class SessionStub(BrowserSession):
     def __init__(self) -> None:
         self._mode = _Mode.EPHEMERAL
-        self._page = FakePage()
+        self._page = PageStub()
         self._context = None
         self._playwright = None
         self.actions = []
@@ -56,7 +56,7 @@ class FakeSession(BrowserSession):
 
 
 def test_browser_wrapper_forwards_page_methods():
-    session = FakeSession()
+    session = SessionStub()
     browser = Browser(session)
 
     browser.goto("https://example.com")
@@ -69,7 +69,7 @@ def test_browser_wrapper_forwards_page_methods():
 
 
 def test_browser_wrapper_forwards_lifecycle_methods():
-    session = FakeSession()
+    session = SessionStub()
     browser = Browser(session)
 
     browser.restart_context()

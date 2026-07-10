@@ -1,7 +1,7 @@
 from pylowright.browser.session import BrowserSession, _Mode
 
 
-class FakePage:
+class PageStub:
     def __init__(self) -> None:
         self.goto_calls = []
         self.wait_calls = []
@@ -27,7 +27,7 @@ class FakePage:
 def test_session_wrappers_delegate_to_page():
     session = BrowserSession.deferred()
     session._mode = _Mode.EPHEMERAL
-    page = FakePage()
+    page = PageStub()
     session._page = page
 
     session.goto("https://example.com")
