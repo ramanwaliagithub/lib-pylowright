@@ -312,3 +312,9 @@ class BrowserSession:  # pylint: disable=too-many-instance-attributes
             self._context.close()
         if self._mode == _Mode.PERSISTENT and self._playwright:
             self._playwright.stop()
+
+    def __enter__(self) -> "BrowserSession":
+        return self
+
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
+        self.close()

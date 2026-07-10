@@ -46,6 +46,12 @@ class Browser:
     def close(self) -> None:
         self.session.close()
 
+    def __enter__(self) -> "Browser":
+        return self
+
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
+        self.close()
+
     @property
     def page(self) -> Any:
         return self.session.page
