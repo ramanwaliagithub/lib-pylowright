@@ -60,6 +60,26 @@ class Browser:
     def wait_for_load_state(self, state: str = "load") -> None:
         self.session.wait_for_load_state(state)
 
+    def restart_context(self) -> None:
+        self.session.restart_context()
+
+    def restart_page(self) -> None:
+        self.session.restart_page()
+
+    def restart_persistent(self) -> None:
+        self.session.restart_persistent()
+
+    def update_external_context(self, pw_context: Any) -> None:
+        self.session.update_external_context(pw_context)
+
+    def start_tracing(self, screenshots: bool = True, snapshots: bool = True,
+                      sources: bool = True) -> None:
+        self.session.start_tracing(screenshots=screenshots, snapshots=snapshots,
+                                   sources=sources)
+
+    def stop_tracing(self, trace_path: str | None = None) -> None:
+        self.session.stop_tracing(trace_path=trace_path)
+
     @property
     def title(self) -> str:
         return self.session.title
